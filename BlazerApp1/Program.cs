@@ -1,5 +1,10 @@
+
+using BlazerApp1.Models;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 var builder = WebApplication.CreateBuilder(args);
+var connString = builder.Configuration.GetConnectionString("BookStoreDbConnection");
+ builder.Services.AddDbContext<BookStoreDbContext>(options=> options.UseSqlServer(connString))
 
 // Add services to the container.
 
