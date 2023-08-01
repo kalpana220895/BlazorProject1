@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlazerApp1.Models;
+namespace BlazerApp1.Data;
 
-public partial class Author
+public partial class Table
 {
     public int Id { get; set; }
 
