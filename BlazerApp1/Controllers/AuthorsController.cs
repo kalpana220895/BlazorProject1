@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using BlazerApp1.Data;
 using BlazerApp1.Models.Author;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlazerApp1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthorsController : ControllerBase
     {
         private readonly BookStoreDbContext _context;
@@ -60,6 +62,7 @@ namespace BlazerApp1.Controllers
         // PUT: api/Authors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize (Roles = "Administator")]
         public async Task<IActionResult> PutAuthor(int id, AuthorUpdateDto authorDto)
         {
             if (id != authorDto.Id)
@@ -100,6 +103,7 @@ namespace BlazerApp1.Controllers
         // POST: api/Authors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Administator")]
         public async Task<ActionResult<AuthorCreateDto>> PostAuthor(AuthorCreateDto AuthorDto)
         {
           if (_context.Authors == null)
@@ -116,6 +120,7 @@ namespace BlazerApp1.Controllers
 
         // DELETE: api/Authors/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administator")]
         public async Task<IActionResult> DeleteAuthor(int id)
         {
             if (_context.Authors == null)

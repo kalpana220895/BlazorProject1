@@ -2,6 +2,7 @@
 using BlazerApp1.Data;
 using BlazerApp1.Models.Author;
 using BlazerApp1.Models.Book;
+using BlazerApp1.Models.User;
 using Microsoft.Build.Framework.Profiler;
 
 namespace BlazerApp1.Configurations
@@ -25,6 +26,9 @@ namespace BlazerApp1.Configurations
             CreateMap<Book, BookDetailsDto>()
                 .ForMember(q => q.AuthorName, d => d.MapFrom(map => $"{map.Author.FirstName}{map.Author.LastName}"))
                 .ReverseMap();
+
+            CreateMap<ApiUser, UserDto >().ReverseMap();
+
 
         }
     }

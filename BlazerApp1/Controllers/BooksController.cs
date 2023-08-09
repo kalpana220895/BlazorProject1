@@ -10,6 +10,8 @@ using BlazerApp1.Models.Book;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BlazerApp1.Controllers
 {
@@ -45,6 +47,7 @@ namespace BlazerApp1.Controllers
 
         // GET: api/Books/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<BookDetailsDto>> GetBook(int id)
         {
           if (_context.Books == null)
@@ -67,6 +70,7 @@ namespace BlazerApp1.Controllers
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administator")]
         public async Task<IActionResult> PutBook(int id, BookUpdateDto bookDto)
         {
             if (id != bookDto.Id)
@@ -107,6 +111,7 @@ namespace BlazerApp1.Controllers
         // POST: api/Books
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Administator")]
         public async Task<ActionResult<BookCreateDto>> PostBook(BookCreateDto bookDto)
         {
           if (_context.Books == null)
@@ -123,6 +128,7 @@ namespace BlazerApp1.Controllers
 
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administator")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             if (_context.Books == null)
